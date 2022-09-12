@@ -13,7 +13,7 @@ const Header = () => {
         <img
           src={logo}
           alt="Souncity logo"
-          className="md:w-[15%] w-1/12 drop-shadow-lg shadow-primary"
+          className="md:w-[15%] w-1/12 drop-shadow-lg shadow-primary logo"
         />
         Sound City
       </div>
