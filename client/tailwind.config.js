@@ -11,7 +11,8 @@ module.exports = {
         'midnight' : '#1b2039'
       },
       backgroundImage : {
-        'fade' : '-webkit-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%)'
+        'fade' : '-webkit-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%)',
+        'fade-white' : '-webkit-radial-gradient(50% 50%, ellipse closest-side, #ffffff, rgba(255, 42, 112, 0) 60%)'
       },
       boxShadow : {
         'glow' : '0 0px 25px -1px var(--tw-shadow-color), 0 0px 4px -2px var(--tw-shadow-color)'

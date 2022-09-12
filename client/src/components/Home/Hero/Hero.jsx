@@ -5,7 +5,7 @@ import waves from './waves.gif'
 
 const Hero = () => {
   return (
-    <section className='px-[6vw] pb-4 flex md:flex-row flex-col items-center bg-secondary text-white' >
+    <section className='section pb-4  md:flex-row flex-col items-center  text-white' >
         <div className='md:w-1/2 w-full'>
             <img src={banner} alt="Girl with Microphone" />
         </div>

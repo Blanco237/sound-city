@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Heading = ({ text, size, alignment='center', styles}) => {
+const Heading = ({ text, alignment='center', styles, color='blue'}) => {
   return (
-    <h2 className={`relative font-medium text-lg  w-fit ${size? `text-[${size}]` : ''} text-[${alignment}] ${styles}`}>
-        <span className='w-full absolute bottom-0 left-0 bg-fade h-[5px]'></span>
+    <h2 className={`relative font-medium text-lg  w-fit text-[${alignment}] ${styles}`}>
+        <span className={`w-full absolute bottom-0 left-0 h-[5px] ${color==='blue'? 'bg-fade' : 'bg-fade-white'}`}></span>
         {text}
     </h2>
   )
