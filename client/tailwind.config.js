@@ -8,6 +8,7 @@ module.exports = {
         'primary' : '#3bc8e7',
         'gray' : '#777777',
         'secondary' : '#14182a',
+        'midnight' : '#1b2039'
       },
       backgroundImage : {
         'fade' : '-webkit-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%)'

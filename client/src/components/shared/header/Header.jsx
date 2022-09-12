@@ -8,7 +8,7 @@ const Header = () => {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <header className="w-full bg-secondary flex px-6 py-2 justify-between text-white fixed">
+    <header className="w-full bg-midnight flex px-6 py-2 justify-between text-white fixed z-50">
       <div className="md:w-1/6 flex items-center gap-2 text-xl font-medium">
         <img
           src={logo}
@@ -18,12 +18,12 @@ const Header = () => {
         Sound City
       </div>
       <nav className="flex">
-        <ul className={`flex items-center md:h-full gap-5 md:static absolute transition-all duration-500  left-0 py-5 w-screen md:w-fit md:flex-row flex-col bg-secondary ${isOpen? 'top-16' : 'top-[-99rem]'}`}>
+        <ul className={`flex items-center md:h-full gap-5 md:static absolute transition-all duration-500  left-0 py-5 w-screen md:w-fit md:flex-row flex-col bg-midnight ${isOpen? 'top-16' : 'top-[-99rem]'}`}>
           {["Home", "Explore", "Login", "Register"].map((item, index) => {
             return ["Login", "Register"].includes(item) ? (
               <button
                 key={item}
-                className="px-5 py-1 bg-primary rounded-2xl shadow-none hover:shadow-glow hover:shadow-primary transition-shadow duration-500"
+                className="btn-primary"
               >
                 {item}
               </button>
