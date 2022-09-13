@@ -26,6 +26,13 @@ body {
   color: white;
   background-color: #3bc7e7;
 }
+input, select{
+  transition: box-shadow 300ms ease;
+}
+input:focus, select:focus {
+  outline:2px solid #3bc7e7;
+  box-shadow: 0px 0px 10px #ffffff;
+}
 
 .logo {
   filter: drop-shadow(0px 0px 10px #3bc7e788);
