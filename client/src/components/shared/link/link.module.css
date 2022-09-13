@@ -1,0 +1,12 @@
+.body {
+    cursor: pointer;
+    display: block;
+}
+.body  span {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+.body:hover  span {
+    opacity: 1;
+}
