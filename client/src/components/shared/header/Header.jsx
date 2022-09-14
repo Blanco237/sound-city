@@ -5,6 +5,7 @@ import logo from "../../../assets/logo.png";
 import { Turn as Hamburger } from "hamburger-react";
 import Login from "../../modals/login/Login";
 import Register from "../../modals/register/Register";
+import Profile from "../profile/Profile";
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
@@ -51,6 +52,7 @@ const Header = () => {
             <button className="btn-primary" onClick={() => setRegister(true)}>
               Register
             </button>
+            <Profile />
           </ul>
           <div className="md:hidden">
             <Hamburger toggled={isOpen} toggle={setOpen} rounded />
