@@ -11,6 +11,7 @@ import Home from './pages/home/Home';
 import Upload from './pages/upload/Upload';
 import Loader from './components/shared/Loader/Loader';
 import { LoadingProvider } from './Context/LoadingContext';
+import Library from './pages/library/Library';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <Notifications />
           <Header />
           {/* <Home /> */}
-          <Upload />
+          {/* <Upload /> */}
+          <Library />
           <Footer />
           <Loader />
         </LoadingProvider>

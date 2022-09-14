@@ -6,8 +6,11 @@ import { Turn as Hamburger } from "hamburger-react";
 import Login from "../../modals/login/Login";
 import Register from "../../modals/register/Register";
 import Profile from "../profile/Profile";
+import useUser from "../../../hooks/useUser";
 
 const Header = () => {
+  const user = useUser();
+
   const [isOpen, setOpen] = useState(false);
   const [showLogin, setLogin] = useState(false);
   const [showRegister, setRegister] = useState(false);
@@ -46,21 +49,36 @@ const Header = () => {
                 </li>
               );
             })}
-            <button className="btn-primary" onClick={() => setLogin(true)}>
-              Login
-            </button>
-            <button className="btn-primary" onClick={() => setRegister(true)}>
-              Register
-            </button>
-            <Profile />
+            {user ? (
+              <Profile />
+            ) : (
+              <>
+                <button className="btn-primary" onClick={() => setLogin(true)}>
+                  Login
+                </button>
+                <button
+                  className="btn-primary"
+                  onClick={() => setRegister(true)}
+                >
+                  Register
+                </button>
+              </>
+            )}
           </ul>
           <div className="md:hidden">
             <Hamburger toggled={isOpen} toggle={setOpen} rounded />
           </div>
         </nav>
       </header>
-      {showLogin && <Login closeModal={() => setLogin(false)} register={() => launch()} />}
-      {showRegister && <Register closeModal={() => setRegister(false)} login={() => launch("register")} />}
+      {showLogin && (
+        <Login closeModal={() => setLogin(false)} register={() => launch()} />
+      )}
+      {showRegister && (
+        <Register
+          closeModal={() => setRegister(false)}
+          login={() => launch("register")}
+        />
+      )}
     </>
   );
 };
