@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth'
 import app from './firebase'
 
 export const auth = getAuth(app);
@@ -70,4 +70,10 @@ export const loginWithGoogle = async (size) => {
         response.emessage = e.message;
     }
     return response;
+}
+
+
+//Sign out user
+export const logout = async () => {
+    await signOut(auth);
 }
