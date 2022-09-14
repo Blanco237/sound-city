@@ -6,7 +6,7 @@ const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
 
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(auth.currentUser);
 
     useEffect(
         //Monitor User State
