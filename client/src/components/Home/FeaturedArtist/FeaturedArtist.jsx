@@ -16,7 +16,7 @@ const FeaturedArtist = () => {
     }
 
   return (
-    <section className='section gap-4 pb-2 pt-10'>
+    <section className='section bg-transparent gap-4 pb-2 pt-10'>
         <header className='w-full flex justify-between text-white'>
             <Heading text={'Featured Artist'} />
             <button>View More</button>
