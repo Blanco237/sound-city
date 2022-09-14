@@ -8,11 +8,11 @@ import {
   FaArrowAltCircleUp as Arrow,
 } from "react-icons/fa";
 
-const Card = ({ image, title, artist, type }) => {
+const Card = ({ image, title, artist, type, full }) => {
   const [menuOpen, setOpen] = React.useState(false);
 
   return (
-    <aside className="md:w-1/4 w-1/2 text-white text-left flex-shrink-0">
+    <aside className={`${full? 'w-full' : 'md:w-1/4 w-1/2'} text-white text-left flex-shrink-0`}>
       <section className="overflow-hidden rounded-md w-full relative ">
         <img
           src={image}
