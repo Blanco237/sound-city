@@ -2,8 +2,10 @@ import React from 'react'
 import { useContext } from 'react'
 import { useState } from 'react'
 import { notify } from 'react-notify-toast'
+import { useNavigate } from 'react-router-dom'
 import LoadingContext from '../../../Context/LoadingContext'
-import { registerUser } from '../../../firebase/auth'
+import { registerUser, loginWithGoogle } from '../../../firebase/auth'
+import useWindowSize from "../../../hooks/useWindowSize";
 import Heading from '../../shared/heading/Heading'
 import Rlink from '../../shared/link/Rlink'
 
@@ -13,6 +15,9 @@ const Register = ({ closeModal, login }) => {
 
     const [formData, setForm] = useState({});
     const { handleLoading } = useContext(LoadingContext);
+    const { width: size } = useWindowSize();
+
+    const navigator = useNavigate();
 
     const handleChange = (e) => {
         setForm({
@@ -31,12 +36,40 @@ const Register = ({ closeModal, login }) => {
         const res = await registerUser(formData);
         handleLoading(false);
         if(res.success){
-            notify.show("Registered Successfully", 'success', 2500);
+            try{
+                notify.show("Registered Successfully", 'success', 2500);
+              }
+              catch(e){
+                console.log(e);
+              }
+              finally{
+                closeModal();
+                navigator("../library", { replace: true });
+              }
         }
         else{
             notify.show(res.emessage, "error");
         }
     }
+
+    const googleLogin = async () => {
+        handleLoading(true);
+        const res = await loginWithGoogle(size);
+        handleLoading(false);
+        if (res.success) {
+          try {
+            notify.show("Google Login Success", "success", 2500);
+          } catch (e) {
+            console.log(e);
+            console.log("Changed page??");
+          } finally {
+            closeModal();
+            navigator("../library", { replace: true });
+          }
+        } else {
+          notify.show(res.emessage, "error");
+        }
+      };
 
   return (
     <aside className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-[99]' onClick={closeModal}>
@@ -54,7 +87,7 @@ const Register = ({ closeModal, login }) => {
                     <input onChange={handleChange} type="password" placeholder='Confirm password' className='px-4 py-1 rounded shadow-md text-secondary' name="cfmPassword" required minLength={6}/>
                     <button className='px-5 py-1 bg-transparent border border-white mt-3 rounded-2xl hover:bg-white hover:text-secondary hover:shadow-md transition-all duration-500'>Register Now</button>
                 </form>
-                <button className='px-5 py-1 font-medium active:shadow-none border border-white mt-3 rounded-2xl bg-white text-secondary hover:shadow-md transition-all duration-500'>Login with Google</button>
+                <button className='px-5 py-1 font-medium active:shadow-none border border-white mt-3 rounded-2xl bg-white text-secondary hover:shadow-md transition-all duration-500' onClick={googleLogin}>Login with Google</button>
                 <div>
                     <p className='flex gap-2'><i>Already have an Account?</i> <Rlink text="Login Here" color="white" onClick={login}/> </p>
                 </div>

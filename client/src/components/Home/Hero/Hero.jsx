@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../../../utils/statics'
 
 import banner from './banner.png'
 import waves from './waves.gif'
@@ -15,7 +17,7 @@ const Hero = () => {
             <h1>Everywhere</h1>
             <h1 className='text-primary shadow'>Everytime</h1>
             <section className='text-base md:mt-10 mt-4 flex gap-4 w-full justify-center md:justify-start'>
-                <button className='btn-primary'>Listen Now</button>
+                <Link to={ROUTES.EXPLORE}><button className='btn-primary'>Listen Now</button></Link>
                 <button className='btn-primary'>Sign In</button>
             </section>
         </div>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { Link, NavLink } from 'react-router-dom'
+
 import logo from "../../../assets/logo.png";
 
 import { Turn as Hamburger } from "hamburger-react";
@@ -7,6 +9,8 @@ import Login from "../../modals/login/Login";
 import Register from "../../modals/register/Register";
 import Profile from "../profile/Profile";
 import useUser from "../../../hooks/useUser";
+import { ROUTES } from "../../../utils/statics";
+import Rlink from "../link/Rlink";
 
 const Header = () => {
   const user = useUser();
@@ -14,6 +18,17 @@ const Header = () => {
   const [isOpen, setOpen] = useState(false);
   const [showLogin, setLogin] = useState(false);
   const [showRegister, setRegister] = useState(false);
+
+  const links = [
+    {
+      title: 'Home',
+      path: ROUTES.HOME
+    }, 
+    {
+      title: 'Explore',
+      path: ROUTES.EXPLORE
+    }
+  ];
 
   const launch = (source) => {
     if (source === "register") {
@@ -42,13 +57,17 @@ const Header = () => {
               isOpen ? "top-16" : "top-[-99rem]"
             }`}
           >
-            {["Home", "Explore"].map((item, index) => {
+            {
+
+            links.map((item, index) => {
               return (
-                <li key={index + item} className="w-full md:w-fit text-center ">
-                  {item}
-                </li>
+                <NavLink key={item.title} to={item.path} className="w-full md:w-fit text-center" style={({isActive}) => isActive? {color: "#3bc8e7"}: undefined}>
+                  <Rlink text={item.title} />
+                </NavLink>
               );
-            })}
+            })
+
+            }
             {user ? (
               <Profile />
             ) : (
