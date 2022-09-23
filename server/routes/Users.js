@@ -15,7 +15,8 @@ router.post('/single', async (req, res) => {
 })
 
 router.post('/create', async (req, res) => {
-    const data = req.body;
+    const { uid, email, displayName, photoURL } = req.body;
+    const data = { uid, email, displayName, photoURL };
     try{
         await Users.create(data);
         res.json(data);

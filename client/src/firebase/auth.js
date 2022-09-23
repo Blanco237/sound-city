@@ -1,4 +1,11 @@
-import { createUserWithEmailAndPassword, getAuth, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut } from 'firebase/auth'
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
+} from 'firebase/auth'
 
 import app from './firebase'
 
@@ -18,10 +25,7 @@ export const loginUser = async (data) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
         const user = userCredential.user;
-        const res = await AxiosInstance.post('/users/single', user);
-        if(res.error){
-            AxiosInstance.post('/users/create',user);
-        }
+        await saveToDatabase(user);
         response.success = true;
     }
     catch (e) {
@@ -39,10 +43,7 @@ export const registerUser = async (data) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
         const user = userCredential.user;
-        const res = await AxiosInstance.post('/users/single', user);
-        if(res.error){
-            AxiosInstance.post('/users/create',user);
-        }
+        await saveToDatabase(user);
         response.success = true;
     }
     catch (e) {
@@ -59,25 +60,13 @@ export const loginWithGoogle = async (size) => {
     let response = {};
     let user;
     try {
-        if(size <= 768){
-            //Mobile Screen, Sign in with redirect
-            let userCredential = await signInWithRedirect(auth, provider);
-            user = userCredential.user;
-            response.success = true;
-        }
-        else {
-            //Desktop Screen, Sign in with Popup
-            const userCredential = await signInWithPopup(auth,provider);
-            user = userCredential.user;
-            response.success = true;
-        }
-        const res = await AxiosInstance.post('/users/single', user);
-        console.log(res);
-        if(res.data.error){
-            await AxiosInstance.post('/users/create',user);
-        }
+        //Desktop Screen, Sign in with Popup
+        const userCredential = await signInWithPopup(auth, provider);
+        user = userCredential.user;
+        response.success = true;
+        await saveToDatabase(user);
     }
-    catch(e){
+    catch (e) {
         response.success = false;
         response.ecode = e.code;
         response.emessage = e.message;
@@ -89,4 +78,12 @@ export const loginWithGoogle = async (size) => {
 //Sign out user
 export const logout = async () => {
     await signOut(auth);
+}
+
+//Save to Database
+const saveToDatabase = async (user) => {
+    const res = await AxiosInstance.post('/users/single', user);
+    if (res.data.error) {
+        await AxiosInstance.post('/users/create', user);
+    }
 }

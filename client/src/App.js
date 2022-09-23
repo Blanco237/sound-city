@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 //Component Imports
 import Footer from './components/shared/footer/Footer';
@@ -20,16 +20,17 @@ function App() {
       <UserProvider >
         <LoadingProvider>
           <Notifications />
-          <Header />
           <Router>
+          <Header />
             <Routes>
-              <Route path={ROUTES.HOME} element={<Home />} />
-              <Route path={ROUTES.LIBRARY} element={<Library />} />
-              <Route path={ROUTES.EXPLORE} element={<div className='w-screen h-screen grid place-items-center'> Explore Page, Coming soon</div>} />
+              <Route exact path={'/'} element={<Navigate to={'/home'} replace={true}/>} />
+              <Route exact path={ROUTES.HOME} element={<Home />} />
+              <Route exact path={ROUTES.LIBRARY} element={<Library />} />
               <Route path={ROUTES.UPLOAD} element={<Upload />} />
+              <Route exact path={ROUTES.EXPLORE} element={<div className='w-screen h-screen grid place-items-center'> Explore Page, Coming soon</div>} />
             </Routes>
-          </Router>
           <Footer />
+          </Router>
           <Loader />
         </LoadingProvider>
       </UserProvider>
