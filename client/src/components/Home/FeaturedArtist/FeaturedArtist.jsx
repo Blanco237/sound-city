@@ -24,7 +24,7 @@ const FeaturedArtist = () => {
         <div className={`flex gap-1 overflow-x-scroll ${styles.scroll}`}>
             {
                 [...Array(10)].map((_,i) => {
-                    return <Card {...artist} type='artist'/>
+                    return <Card {...artist} type='artist' key={Math.random()}/>
                 })
             }
         </div>

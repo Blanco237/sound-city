@@ -25,7 +25,7 @@ const RecentlyPlayed = () => {
         <div className={`flex gap-1 overflow-x-scroll ${styles.scroll}`}>
             {
                 [...Array(10)].map((_,i) => {
-                    return <Card {...song} />
+                    return <Card {...song} key={Math.random()} />
                 })
             }
         </div>
