@@ -1,11 +1,13 @@
 import React from "react";
 import { logout } from "../../../firebase/auth";
 import useLoading from "../../../hooks/useLoading";
+import useUser from "../../../hooks/useUser";
 
-import female from "./female.jpg";
 
 const Profile = () => {
   const [showProfileMenu, setProfileMenu] = React.useState(false);
+
+  const user = useUser();
 
   const { handleLoading } = useLoading();
 
@@ -20,7 +22,7 @@ const Profile = () => {
       <div
         className={`w-10 h-10 border border-primary rounded-full overflow-hidden`}
       >
-        <img src={female} alt="Profile" className="full" />
+        <img src={user?.photoURL} alt="Profile" className="full" />
       </div>
       {showProfileMenu && (
         <div
