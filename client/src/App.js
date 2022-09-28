@@ -13,6 +13,8 @@ import { UserProvider } from './Context/UserContext';
 import Notifications from 'react-notify-toast'
 import { LoadingProvider } from './Context/LoadingContext';
 import { ROUTES } from './utils/statics';
+import Explore from './pages/explore/Explore';
+import Play from './pages/play/Play';
 
 function App() {
   return (
@@ -27,7 +29,8 @@ function App() {
               <Route exact path={ROUTES.HOME} element={<Home />} />
               <Route exact path={ROUTES.LIBRARY} element={<Library />} />
               <Route path={ROUTES.UPLOAD} element={<Upload />} />
-              <Route exact path={ROUTES.EXPLORE} element={<div className='w-screen h-screen grid place-items-center'> Explore Page, Coming soon</div>} />
+              <Route exact path={ROUTES.EXPLORE} element={<Explore />} />
+              <Route path={ROUTES.PLAY} element={<Play />}/>
             </Routes>
           <Footer />
           </Router>

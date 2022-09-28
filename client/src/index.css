@@ -11,6 +11,9 @@
   .section {
     @apply w-full bg-secondary flex px-[6vw] flex-col
   }
+  .stateful {
+    @apply active:bg-[#3bc8e7a1] transition-colors hover:bg-[#3bc7e7d0]
+  }
 }
 
 
@@ -32,6 +35,11 @@ input, select{
 input:focus, select:focus {
   outline:2px solid #3bc7e7;
   box-shadow: 0px 0px 10px #ffffff;
+}
+
+input[type="range"]:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .logo {
