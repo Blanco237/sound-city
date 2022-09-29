@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
         privacy : {
             type: DataTypes.STRING, 
             defaultValue: "public"
+        },
+        playCount : {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
     },
     {
