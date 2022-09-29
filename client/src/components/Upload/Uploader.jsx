@@ -2,13 +2,10 @@ import React from 'react'
 
 import { FaCloudUploadAlt } from 'react-icons/fa'
 
-const Uploader = ({ filetype }) => {
-
-    const [file, setFile] = React.useState(null);
+const Uploader = ({ filetype, setFile, file }) => {
 
     const handleFile = (e) => {
         setFile(e.target.files[0]);
-        console.log(e.target.files);
         console.log(file);
     }
   return (

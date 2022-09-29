@@ -1,12 +1,15 @@
 import React from "react";
+import { Navigate } from 'react-router-dom'
 
 import useUser from "../../../hooks/useUser";
-
-import female from "./female.jpg";
 
 const UserInfo = () => {
 
   const user = useUser();
+
+  if(!user){
+    return <Navigate to={'/home'} replace={true}/>
+  }
 
   return (
     <section className="section text-white gap-4">
