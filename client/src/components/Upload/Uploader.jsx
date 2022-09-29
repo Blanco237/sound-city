@@ -6,7 +6,6 @@ const Uploader = ({ filetype, setFile, file }) => {
 
     const handleFile = (e) => {
         setFile(e.target.files[0]);
-        console.log(file);
     }
   return (
     <section className='md:w-1/2 w-full flex flex-col items-center justify-center gap-1 h-72 mb-4'>

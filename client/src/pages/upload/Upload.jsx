@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import { notify } from 'react-notify-toast'
+import { notify } from "react-notify-toast";
+
+import AxiosInstance from "../../api/api";
 
 import Heading from "../../components/shared/heading/Heading";
 import Uploader from "../../components/Upload/Uploader";
@@ -17,14 +19,31 @@ const Upload = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Data loading");
-    console.log(formData);
-    if(!audioFile){
+    if (!audioFile) {
       notify.show("Please Add an Audio File", "warning", 1500);
       return;
     }
+    if (!imageFile) {
+      notify.show("Please Add an Image File", "warning", 1500);
+      return;
+    }
+
+    const audioForm = new FormData();
+    audioForm.append("audio", audioFile);
+    const imageForm = new FormData();
+    imageForm.append("image", imageFile);
+
+    const [imageRes, audioRes] = await Promise.all([
+      AxiosInstance.post("/upload/image", imageForm),
+      AxiosInstance.post("/upload/audio", audioForm),
+    ]);
+
+    formData.image = imageRes.data.url;
+    formData.audio = audioRes.data.url;
+
+    console.log(formData);
   };
 
   return (
@@ -34,8 +53,16 @@ const Upload = () => {
           Upload and Share Your Music with The World
         </h1>
         <div className="flex w-full justify-between md:flex-row flex-col">
-          <Uploader filetype={"Audio"} setFile={setAudioFile} file={audioFile}/>
-          <Uploader filetype={"Image"} setFile={setImageFile} file={imageFile}/>
+          <Uploader
+            filetype={"Audio"}
+            setFile={setAudioFile}
+            file={audioFile}
+          />
+          <Uploader
+            filetype={"Image"}
+            setFile={setImageFile}
+            file={imageFile}
+          />
         </div>
       </section>
       <section className="bg-midnight md:w-1/2 w-11/12 md:py-8 py-4 px-4 shadow rounded-md flex flex-col items-center gap-4 text-white">
@@ -84,11 +111,9 @@ const Upload = () => {
               <option value="private">Private</option>
             </select>
           </label>
-        <div className="w-full"><button
-          className="btn-primary mt-4"
-        >
-          Upload Now
-        </button></div>
+          <div className="w-full">
+            <button className="btn-primary mt-4">Upload Now</button>
+          </div>
         </form>
       </section>
     </main>
