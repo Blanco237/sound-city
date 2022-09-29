@@ -1,7 +1,7 @@
 const express = require('express');
-const cloudinary = require('cloudinary').v2;
-
 const router = express.Router();
+
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
     cloud_name: 'blanco237',
@@ -9,8 +9,27 @@ cloudinary.config({
     api_secret: 'QUP-PekAXZZOrd0Ffkwx5igunoI'
 });
 
+router.post('/image', async (req, res) => {
+    console.log("Image Upload Request");
+    const file = req.files.image;
+    if(!file){
+        console.log(req);
+        return;
+    }
 
-router.post('/audio', (req, res) => {
+    const result = await cloudinary.uploader.upload(file.tempFilePath, {
+        folder: "image",
+        resource_type: "image"
+    })
+
+    res.json(result);
+});
+
+
+router.post('/audio', async (req, res) => {
+
+    console.log("Audio Upload")
+
     const file = req.files.audio;
     if (!file) {
         console.log(req);
@@ -24,20 +43,9 @@ router.post('/audio', (req, res) => {
     res.json(result);
 })
 
-router.post('/image', (req, res) => {
-    const file = req.files.image;
-    if(!file){
-        console.log(req);
-        return;
-    }
 
-    const result = await cloudinary.uploader.upload(file.tempFilePath, {
-        folder: "image",
-        resource_type: "image"
-    })
 
-    res.json(result);
-})
+
 
 
 module.exports = router;

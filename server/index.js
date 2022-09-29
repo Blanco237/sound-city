@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
+
 require('dotenv').config();
+
+
 
 const app = express();
 
@@ -24,10 +27,10 @@ const uploadRouter = require('./routes/Upload');
 app.use('/users', userRouter);
 app.use('/upload', uploadRouter);
 
-
 const port = process.env.PORT || 5000;
 db.sequelize.sync().then(() => {
     app.listen(port, () => {
         console.log(`Server is running on ${port}`)
     })
 })
+
