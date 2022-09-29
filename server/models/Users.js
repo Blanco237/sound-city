@@ -1,5 +1,7 @@
 // const { DataTypes } = require("sequelize");
 
+const Songs = require("./Songs");
+
 module.exports = (sequelize, DataTypes) => {
 
     const Users = sequelize.define("Users" , {
@@ -27,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
         paranoid: true
     }
     )
+
+    Users.hasMany(Songs);
+    Songs.belongsTo(Users);
 
     return Users;
 }
