@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+require('dotenv').config();
+
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: 'blanco237',
-    api_key: '219968633416455',
-    api_secret: 'QUP-PekAXZZOrd0Ffkwx5igunoI'
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 router.post('/image', async (req, res) => {
