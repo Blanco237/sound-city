@@ -6,6 +6,8 @@ import useMusic from "../../../hooks/useMusic";
 import Card from "../../shared/Card/Card";
 import Heading from "../../shared/heading/Heading";
 
+import music from './music-load.png';
+
 const MusicList = () => {
 
     const { songs, handleSongs, allSongs } = useMusic();
@@ -21,6 +23,10 @@ const MusicList = () => {
     handleSongs(tempSongs);
   };
 
+  useEffect(() => {
+    updateSongs();
+  }, [allSongs]);
+
   const changePage = ({ selected }) => {
     setPageNumber(selected);
     scrollToTop();
@@ -30,7 +36,7 @@ const MusicList = () => {
     return (
       <>
         {songs.map((song, index) => {
-          return <Card {...song} full={true} key={index + song.title} />;
+          return <Card {...song} full={true} key={song.sid} />;
         })}
       </>
     );
@@ -53,9 +59,17 @@ const MusicList = () => {
       <div>
         <Heading text={"Public Uploads"} styles={"text-white"} />
       </div>
-      <div className={`grid grid-cols-2 md:grid-cols-4 gap-2`}>
+      {
+        songs.length === 0 ? <div className="w-full flex gap-4">
+          {
+            [...Array(4)].map((_,i) => {
+              return <Card image={music} extstyles={`animate-pulse`} />
+            })
+          }
+        </div> : <div className={`grid grid-cols-2 md:grid-cols-4 gap-2`}>
         <PrintSongs songs={songs} />
       </div>
+      }
       <ReactPaginate
         previousLabel="Previous"
         nextLabel="Next"

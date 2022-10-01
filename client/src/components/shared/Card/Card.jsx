@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ sid, image, track, artist, type, full }) => {
+const Card = ({ sid, image, track, artist, type, full, extstyles }) => {
   const [menuOpen, setOpen] = React.useState(false);
   const navigator = useNavigate();
 
@@ -21,7 +21,7 @@ const Card = ({ sid, image, track, artist, type, full }) => {
     <aside
       className={`${
         full ? "w-full" : "md:w-1/4 w-1/2"
-      } text-white text-left flex-shrink-0`}
+      } text-white text-left flex-shrink-0 ${extstyles}`}
     >
       <section className="overflow-hidden rounded-md w-full relative ">
         <img

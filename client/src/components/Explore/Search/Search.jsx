@@ -13,7 +13,7 @@ const Search = () => {
 
   const tempSongs = useMemo(() => {
     return allSongs.filter(
-      (song) => song.title.includes(deferredName) || song.artist.includes(deferredName)
+      (song) => song.track.includes(deferredName) || song.artist.includes(deferredName)
     );
   }, [deferredName]);
 

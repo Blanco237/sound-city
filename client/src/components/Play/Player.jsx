@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import WaveSurfer from "wavesurfer.js";
 
 import { FaPause, FaPlay, FaVolumeUp } from "react-icons/fa";
-import music from "./music.jpg";
 
 import Heading from "../shared/heading/Heading";
 
