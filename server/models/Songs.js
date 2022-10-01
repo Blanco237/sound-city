@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        artist : {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         privacy : {
             type: DataTypes.STRING, 
             defaultValue: "public"
@@ -38,4 +42,6 @@ module.exports = (sequelize, DataTypes) => {
         paranoid: true
     }
     )
+
+    return Songs;
 }

@@ -7,8 +7,8 @@ router.post('/save', async (req, res) => {
     const songData = req.body;
 
     try {
-        await Songs.create(songData);
-        res.json(songData);
+        const song = await Songs.create(songData);
+        res.json(song);
     }
     catch (e) {
         res.status(400).json({ error: e.message });
@@ -55,3 +55,10 @@ router.get('/get/:sid', async (req, res) => {
         res.status(400).json({ error: e.message });
     }
 })
+
+router.post('/updateCount', async (req, res) => {
+    const { sid } = req.body;
+    await Songs.increment({playCount: 1}, {where: {sid}})
+})
+
+module.exports = router;

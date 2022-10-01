@@ -1,4 +1,4 @@
-// const { DataTypes } = require("sequelize");
+// const { DataTypes } = require("sequelize")
 
 module.exports = (sequelize, DataTypes) => {
 
@@ -29,7 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     )
 
     Users.associate = (models) => {
-        Users.hasMany(models.Songs);
+        Users.hasMany(models.Songs, {
+            foreignKey: {
+                name: 'uid'
+            }
+        });
     }
 
     return Users;

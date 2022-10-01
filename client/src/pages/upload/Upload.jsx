@@ -1,16 +1,28 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 import { notify } from "react-notify-toast";
+import { Navigate, useNavigate } from "react-router-dom"
 
 import AxiosInstance from "../../api/api";
 
 import Heading from "../../components/shared/heading/Heading";
 import Uploader from "../../components/Upload/Uploader";
+import useLoading from "../../hooks/useLoading";
+import useUser from "../../hooks/useUser";
 
 const Upload = () => {
   const [formData, setForm] = useState({});
   const [imageFile, setImageFile] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
+
+  const { handleLoading } = useLoading();
+  const user = useUser();
+  
+  const navigator = useNavigate();
+
+  if(!user){
+    return <Navigate to="/home" replace={true} />
+  }
 
   const handleChange = (e) => {
     setForm({
@@ -35,6 +47,8 @@ const Upload = () => {
     const imageForm = new FormData();
     imageForm.append("image", imageFile);
 
+    try{
+      handleLoading(true);
     const [imageRes, audioRes] = await Promise.all([
       AxiosInstance.post("/upload/image", imageForm),
       AxiosInstance.post("/upload/audio", audioForm),
@@ -42,8 +56,27 @@ const Upload = () => {
 
     formData.image = imageRes.data.url;
     formData.audio = audioRes.data.url;
+    formData.uid  = user.uid;
 
-    console.log(formData);
+    const res = await AxiosInstance.post("/songs/save", formData);
+
+    if(res.data.error){
+      notify.show(res.data.error, "error", 2500);
+    }
+    else{
+      notify.show("Uploaded Successfully", "success", 2000);
+      console.log(res.data);
+      const sid = res.data.sid;
+      navigator(`../play/${sid}`, { replace: true});
+    }
+  }
+  catch(e){
+    notify.show(e.message, "error", 2500);
+  }
+  finally{
+    handleLoading(false);
+  }
+
   };
 
   return (

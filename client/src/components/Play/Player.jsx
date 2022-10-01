@@ -7,7 +7,7 @@ import music from "./music.jpg";
 
 import Heading from "../shared/heading/Heading";
 
-const Player = () => {
+const Player = ({ song }) => {
   const wavesurfer = useRef(null);
 
   const [showVolume, setShowVolume] = useState(false);
@@ -16,13 +16,6 @@ const Player = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgess] = useState(5);
   const [volume, setVolume] = useState(50);
-
-  const song = {
-    image: music,
-    title: "Dream Your Moments (Duet)",
-    artist: "Eva Cornish & Brain Hill",
-    album: "Love and War",
-  };
 
   useEffect(() => {
     if (wavesurfer.current) wavesurfer.current.destroy();
@@ -64,18 +57,11 @@ const Player = () => {
     });
 
     wavesurfer.current.on("loading", (progress) => {
-      console.log("Loading: " + progress);
       setProgess(progress);
     });
 
-    wavesurfer.current.load(
-      // "https://www.mfiles.co.uk/mp3-downloads/gs-cd-track2.mp3"
-      // "https://firebasestorage.googleapis.com/v0/b/sound-city-237.appspot.com/o/Free_Test_Data_500KB_MP3.mp3"
-      // "https://firebasestorage.googleapis.com/v0/b/sound-city-237.appspot.com/o/Free_Test_Data_500KB_MP3.mp3",
-      // "https://s3-eu-west-1.amazonaws.com/soundmites/f5/4779e0c3a111e3b368f97e5bff4d34/coincidence.mp3"
-      // "https://firebasestorage.googleapis.com/v0/b/sound-city-237.appspot.com/o/Cardi%20B%20-%20Foreva.mp3"
-      "https://res.cloudinary.com/blanco237/video/upload/v1664470231/Cardi_B_-_Foreva_zcmxco.mp3"
-    );
+    console.log(song);
+    wavesurfer.current.load(song.audio);
   }, []);
 
   const playPause = async () => {
@@ -115,13 +101,13 @@ const Player = () => {
         <div className="md:w-2/12 w-3/5 bg-black rounded-md overflow-hidden shadow-[#3bc7e76b] shadow-glow">
           <img
             src={song.image}
-            alt={song.title}
+            alt={song.track}
             className="w-full h-full"
             style={{ objectFit: "cover" }}
           />
         </div>
         <aside className="flex flex-col gap-3 text-primary">
-          <h1 className="text-4xl text-white">{song.title}</h1>
+          <h1 className="text-4xl text-white">{song.track}</h1>
           <h2 className="text-2xl ">{song.artist}</h2>
           <h2 className="text-xl ">
             Album:{" "}
@@ -131,7 +117,7 @@ const Player = () => {
               <span className="text-gray">No Album</span>
             )}
           </h2>
-          <h3 className="text-gray">Played 5 times</h3>
+          <h3 className="text-gray">Played {song.playCount} times</h3>
         </aside>
         <div className="ml-[auto] self-end flex gap-5 text-white md:flex-row flex-row-reverse">
           <div
@@ -165,17 +151,17 @@ const Player = () => {
       <section className="w-full flex items-center justify-center gap-1 text-white">
         <p className="w-1/12 md:text-base text-sm">{playTime}</p>
         <div className="w-10/12 relative" id="waveform">
-          {
-            isLoading && <div
-            className="absolute top-1/2 left-8 z-10 rounded-lg overflow-hidden w-10/12 border border-primary h-4 p-1 animate-in slide-in-from-bottom-4 fade-in-40"
-            role={"progressbar"}
-          >
+          {isLoading && (
             <div
-              className={`h-full bg-primary rounded-md transition-all`}
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          }
+              className="absolute top-1/2 left-8 z-10 rounded-lg overflow-hidden w-10/12 border border-primary h-4 p-1 animate-in slide-in-from-bottom-4 fade-in-40"
+              role={"progressbar"}
+            >
+              <div
+                className={`h-full bg-primary rounded-md transition-all`}
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          )}
         </div>
         <p className="w-1/12 md:text-base text-sm">{getDuration()}</p>
       </section>

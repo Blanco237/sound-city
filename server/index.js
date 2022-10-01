@@ -24,8 +24,10 @@ const db = require('./models');
 /*Router Import*/
 const userRouter = require('./routes/Users');
 const uploadRouter = require('./routes/Upload');
+const songRouter = require('./routes/Songs');
 app.use('/users', userRouter);
 app.use('/upload', uploadRouter);
+app.use('/songs', songRouter);
 
 const port = process.env.PORT || 5000;
 db.sequelize.sync().then(() => {

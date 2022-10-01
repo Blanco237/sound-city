@@ -3,5 +3,5 @@ export const ROUTES = {
     LIBRARY: '/library',
     EXPLORE: '/explore',
     UPLOAD: '/upload',
-    PLAY: '/play/:id'
+    PLAY: '/play/:sid'
 }
