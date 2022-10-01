@@ -32,8 +32,13 @@ const Play = () => {
       }
       }
 
-      if(!song) getSong();
-    }, [])
+      getSong();
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }, [sid])
 
     
 
@@ -42,7 +47,10 @@ const Play = () => {
         {
           song? <Player song={song}/> : <div className='w-full text-center text-white text-5xl h-60 grid place-items-center'>Loading... </div>
         }
-        <OtherTitles />
+        {
+          song? <OtherTitles sid={song.sid}/> : <div className='w-full text-center text-white text-5xl h-60 grid place-items-center'>Loading... </div>
+        }
+        
     </div>
   )
 }

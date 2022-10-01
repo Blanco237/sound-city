@@ -42,6 +42,7 @@ const Player = ({ song }) => {
     wavesurfer.current.on("error", (msg) => {
       console.log("error");
       console.error(msg);
+      window.location.reload();
     });
 
     wavesurfer.current.on("audioprocess", () => {
@@ -57,12 +58,13 @@ const Player = ({ song }) => {
     });
 
     wavesurfer.current.on("loading", (progress) => {
+      if(!isLoading) setIsLoading(true);
       setProgess(progress);
     });
 
     console.log(song);
     wavesurfer.current.load(song.audio);
-  }, []);
+  }, [song]);
 
   const playPause = async () => {
     await wavesurfer.current.playPause();
