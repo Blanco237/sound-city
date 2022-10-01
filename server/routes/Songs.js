@@ -100,4 +100,19 @@ router.get('/similar/:sid', async (req, res) => {
         res.status(400).json({error: e.message});
     }
 })
+
+router.get('/recent', async (req, res) => {
+    try {
+        const recent = await Songs.findAll({
+            limit: 9,
+            order : [
+                ['playCount', 'ASC']
+            ]
+        })
+        res.json(recent);
+    }
+    catch(e) {
+        res.status(400).json({error: e.message});
+    }
+})
 module.exports = router;
