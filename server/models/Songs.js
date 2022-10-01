@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Songs = sequelize.define("Songs", {
-        id : {
+        sid : {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4, 
             primaryKey: true,
