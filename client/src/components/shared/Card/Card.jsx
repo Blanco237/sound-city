@@ -7,16 +7,26 @@ import {
   FaRegPlayCircle,
   FaArrowAltCircleUp as Arrow,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const Card = ({ image, title, artist, type, full }) => {
+const Card = ({ sid, image, track, artist, type, full }) => {
   const [menuOpen, setOpen] = React.useState(false);
+  const navigator = useNavigate();
+
+  const playSong = () => {
+    navigator(`../play/${sid}`, { replace: true });
+  };
 
   return (
-    <aside className={`${full? 'w-full' : 'md:w-1/4 w-1/2'} text-white text-left flex-shrink-0`}>
+    <aside
+      className={`${
+        full ? "w-full" : "md:w-1/4 w-1/2"
+      } text-white text-left flex-shrink-0`}
+    >
       <section className="overflow-hidden rounded-md w-full relative ">
         <img
           src={image}
-          alt={title + "-" + artist}
+          alt={track + "-" + artist}
           className={`${styles.image} w-full`}
         />
         <div
@@ -45,13 +55,16 @@ const Card = ({ image, title, artist, type, full }) => {
               Download Now
             </li>
           </ul>
-          <span className="text-4xl cursor-pointer hover:scale-125 transition-all">
+          <span
+            className="text-4xl cursor-pointer hover:scale-125 transition-all"
+            onClick={playSong}
+          >
             {type === "artist" ? <Arrow /> : <FaRegPlayCircle />}
           </span>
         </div>
       </section>
       <section className="mt-2">
-        <h3 className="font-bold">{title}</h3>
+        <h3 className="font-bold">{track}</h3>
         <h4 className="text-gray">{artist}</h4>
       </section>
     </aside>
