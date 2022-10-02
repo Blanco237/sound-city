@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { notify } from "react-notify-toast";
+import { Link } from 'react-router-dom'
 
 import styles from "./recent.module.css";
 
 import Heading from "../../shared/heading/Heading";
 import Card from "../../shared/Card/Card";
-import { useState } from "react";
-import { useEffect } from "react";
 import AxiosInstance from "../../../api/api";
-import { notify } from "react-notify-toast";
 
 import music from "./music-load.png";
 
@@ -31,7 +31,7 @@ const RecentlyPlayed = () => {
     <section className="section gap-4 pb-2">
       <header className="w-full flex justify-between text-white">
         <Heading text={"Recently Played"} />
-        <button>View More</button>
+        <Link to="/explore"><button>View More</button></Link>
       </header>
       {recent.length === 0 ? (
         <div className="w-full flex gap-4">

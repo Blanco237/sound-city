@@ -2,15 +2,7 @@ import React from 'react'
 import Card from '../../shared/Card/Card';
 import Heading from '../../shared/heading/Heading';
 
-import music from './music.jpg';
-
 const YourSongs = ({ songs }) => {
-
-    const song = {
-        image: music,
-        title: 'Dream Your Moments (Duet)',
-        artist: 'Eva Cornish & Brain Hill'
-    }
 
   return (
     <section className='section gap-4 '>

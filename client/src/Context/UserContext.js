@@ -9,16 +9,18 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(auth.currentUser);
 
     useEffect(
-        //Monitor User State
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                //User is logged in
-                setUser(user);
-            }
-            else {
-                setUser(null);
-            }
-        }), []
+        () => {
+            //Monitor User State
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    //User is logged in
+                    setUser(user);
+                }
+                else {
+                    setUser(null);
+                }
+            })
+        }, []
     )
 
 

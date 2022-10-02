@@ -1,8 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import AxiosInstance from "../../../api/api";
 
 const UserInfo = ({ user, uploadCount }) => {
 
