@@ -5,7 +5,7 @@ import WaveSurfer from "wavesurfer.js";
 import { FaPause, FaPlay, FaVolumeUp } from "react-icons/fa";
 
 import Heading from "../shared/heading/Heading";
-import { notify } from "../../../../server/routes/Users";
+import { notify } from "react-notify-toast";
 
 const Player = ({ song }) => {
   const wavesurfer = useRef(null);
@@ -42,7 +42,7 @@ const Player = ({ song }) => {
     wavesurfer.current.on("error", (msg) => {
       console.log("error");
       console.error(msg);
-      notify.show(error,"error", 2500);
+      notify.show(msg,"error", 2500);
     });
 
     wavesurfer.current.on("audioprocess", () => {
