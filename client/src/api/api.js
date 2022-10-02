@@ -1,10 +1,7 @@
 import axios from 'axios';
-// import dotenv from 'dotenv'
-
-// dotenv.config();
 
 const AxiosInstance = axios.create({
-    baseURL: 'http://localhost:5500'
+    baseURL: process.env.REACT_BASE_URL
 })
 
 export default AxiosInstance;
