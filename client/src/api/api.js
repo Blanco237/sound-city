@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const AxiosInstance = axios.create({
-    baseURL: process.env.REACT_BASE_URL
+    baseURL: 'https://sound-city-server-production.up.railway.app/'
 })
 
 export default AxiosInstance;
