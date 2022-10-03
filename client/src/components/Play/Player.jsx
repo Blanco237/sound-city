@@ -36,6 +36,7 @@ const Player = ({ song }) => {
     wavesurfer.current.on("ready", () => {
       // wavesurfer.current.play();
       setIsLoading(false);
+      setVolume(wavesurfer.current.getVolume() * 100);
     });
 
     wavesurfer.current.on("error", (msg) => {
