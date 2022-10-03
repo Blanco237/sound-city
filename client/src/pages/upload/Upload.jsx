@@ -55,7 +55,7 @@ const Upload = () => {
     ]);
 
     formData.image = imageRes.data.url;
-    formData.audio = audioRes.data.url;
+    formData.audio = audioRes.data.url.replace('http', 'https');
     formData.uid  = user.uid;
 
     const res = await AxiosInstance.post("/songs/save", formData);
