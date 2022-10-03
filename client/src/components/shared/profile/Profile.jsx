@@ -42,6 +42,7 @@ const Profile = () => {
             style={({ isActive }) =>
               isActive ? { textDecoration: "underline" } : undefined
             }
+            onClick={() => setProfileMenu(false)}
           >
             <p className="cursor-pointer hover:bg-slate-200 hover:bg-opacity-30 transition-all">
               My Library
@@ -52,6 +53,7 @@ const Profile = () => {
             style={({ isActive }) =>
               isActive ? { textDecoration: "underline" } : undefined
             }
+            onClick={() => setProfileMenu(false)}
           >
             <p className="cursor-pointer hover:bg-slate-200 hover:bg-opacity-30 transition-all">
               Upload

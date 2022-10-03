@@ -40,6 +40,16 @@ const Header = () => {
     }
   };
 
+  const openLogin = () => {
+    setLogin(true);
+    setOpen(false);
+  }
+
+  const openRegister = () => {
+    setRegister(true);
+    setOpen(false);
+  }
+
   return (
     <>
       <header className="w-full bg-midnight flex px-6 py-2 justify-between text-white fixed z-50">
@@ -61,7 +71,7 @@ const Header = () => {
 
             links.map((item, index) => {
               return (
-                <NavLink key={item.title} to={item.path} className="w-full md:w-fit text-center" style={({isActive}) => isActive? {color: "#3bc8e7"}: undefined}>
+                <NavLink key={item.title} to={item.path} className="w-full md:w-fit text-center" style={({isActive}) => isActive? {color: "#3bc8e7"}: undefined} onClick={() => setOpen(false)}>
                   <Rlink text={item.title} />
                 </NavLink>
               );
@@ -72,12 +82,12 @@ const Header = () => {
               <Profile />
             ) : (
               <>
-                <button className="btn-primary" onClick={() => setLogin(true)}>
+                <button className="btn-primary" onClick={openLogin}>
                   Login
                 </button>
                 <button
                   className="btn-primary"
-                  onClick={() => setRegister(true)}
+                  onClick={openRegister}
                 >
                   Register
                 </button>
