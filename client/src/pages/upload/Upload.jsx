@@ -49,10 +49,9 @@ const Upload = () => {
 
     try{
       handleLoading(true);
-    const [imageRes, audioRes] = await Promise.all([
-      AxiosInstance.post("/upload/image", imageForm),
-      AxiosInstance.post("/upload/audio", audioForm),
-    ]);
+
+    const imageRes = await AxiosInstance.post("/upload/image", imageForm);
+    const audioRes = await AxiosInstance.post("/upload/audio", audioForm);
 
     formData.image = imageRes.data.url;
     formData.audio = audioRes.data.url.replace('http', 'https');
