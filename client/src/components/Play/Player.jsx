@@ -36,7 +36,6 @@ const Player = ({ song }) => {
     wavesurfer.current.on("ready", () => {
       // wavesurfer.current.play();
       setIsLoading(false);
-      console.log("Surfer is Ready");
     });
 
     wavesurfer.current.on("error", (msg) => {
@@ -59,11 +58,12 @@ const Player = ({ song }) => {
 
     wavesurfer.current.on("loading", (progress) => {
       if(!isLoading) setIsLoading(true);
+      if(isPlaying) setIsPlaying(false);
       setProgess(progress);
     });
 
-    console.log(song);
     wavesurfer.current.load(song.audio);
+
   }, [song]);
 
   const playPause = async () => {
@@ -97,7 +97,7 @@ const Player = ({ song }) => {
   };
 
   return (
-    <section className="section pb-10 gap-4">
+    <section className="section pb-10 gap-4 relative">
       <Heading text={"Now Playing"} styles={"text-white"} />
       <section className="flex w-full gap-4 md:flex-row flex-col">
         <div className="md:w-2/12 w-3/5 bg-black rounded-md overflow-hidden shadow-[#3bc7e76b] shadow-glow">
@@ -124,14 +124,14 @@ const Player = ({ song }) => {
         <div className="ml-[auto] self-end flex gap-5 text-white md:flex-row flex-row-reverse">
           <div
             role={"button"}
-            className="bg-primary px-3 py-3 rounded-full grid place-items-center shadow cursor-pointer stateful"
+            className={`${isLoading? 'bg-gray' : 'bg-primary'} px-3 py-3 rounded-full grid place-items-center shadow cursor-pointer stateful`}
             onClick={playPause}
           >
             <span>{isPlaying ? <FaPause /> : <FaPlay />}</span>
           </div>
           <div role={"button"} className="relative">
             <span
-              className="bg-primary px-3 py-3 rounded-full grid place-items-center shadow cursor-pointer stateful"
+              className={`${isLoading? 'bg-gray' : 'bg-primary'} px-3 py-3 rounded-full grid place-items-center shadow cursor-pointer stateful`}
               onClick={() => setShowVolume((showVolume) => !showVolume)}
             >
               <FaVolumeUp />
